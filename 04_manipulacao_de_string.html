@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Operações com Strings</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+       
+        
+        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+        
+        <script>
+            
+            function gerar()
+            {
+                let opt_value = parseInt(document.getElementById("opt_string").value);
+                
+                if(opt_value === 0)
+                {
+                    information_error('ERRO', 'selecione uma opção', false, 2500);
+                }
+                else if(opt_value === 1)
+                {
+                    document.getElementById('area_saida').value = document.getElementById('area_entrada').value.toString().toUpperCase();
+                }
+                else if(opt_value === 2)
+                {
+                    document.getElementById('area_saida').value = document.getElementById('area_entrada').value.toString().toLowerCase();
+                }
+                else if(opt_value === 3)
+                {
+                    document.getElementById('area_saida').value = (document.getElementById('area_entrada').value.toString()).split("").reverse().join("");;
+                }
+                else if(opt_value === 4)
+                {
+                    document.getElementById('area_saida').value = (document.getElementById('area_entrada').value.toString()).replace(/[aeiou]/gm, "");
+                }
+                else if(opt_value === 5)
+                {
+                    document.getElementById('area_saida').value = (document.getElementById('area_entrada').value.toString()).replace(/[^aeiou]/gm, "");
+                }
+                 else if(opt_value === 6)
+                {
+                    let saida = document.getElementById('area_entrada').value.toString();
+                    
+                                                                             
+                    saida = saida.replace(new RegExp('[ÁÀÂÃÄ]','g'), 'A');
+                    saida = saida.replace(new RegExp('[ÉÈÊË]','g'), 'E');
+                    saida = saida.replace(new RegExp('[ÍÌÎÏ]','g'), 'I');
+                    saida = saida.replace(new RegExp('[ÓÒÔÕÖÕ]','g'), 'O');
+                    saida = saida.replace(new RegExp('[ÚÙÛÜ]','g'), 'U');
+                    saida = saida.replace(new RegExp('[Ç]','g'), 'C');
+                    
+                    saida = saida.replace(new RegExp('[áàâãä]','g'), 'a');
+                    saida = saida.replace(new RegExp('[éèêë]','g'), 'e');
+                    saida = saida.replace(new RegExp('[íìîï]','g'), 'i');
+                    saida = saida.replace(new RegExp('[ÓÒÔÕÖÕ]','g'), 'o');
+                    saida = saida.replace(new RegExp('[úùûü]','g'), 'u');
+                    saida = saida.replace(new RegExp('[ç]','g'), 'c');
+                    document.getElementById('area_saida').value = saida;
+                }
+                else if(opt_value === 7)
+                {
+                    document.getElementById('area_saida').value = (document.getElementById('area_entrada').value.toString()).trim();
+                }
+                if(opt_value !== 0)
+                {
+                    information_ok('Ok', 'gerado com Sucesso', false, 2500);
+                }
+            }
+            
+        </script>
+        
+        <script>
+            function information_ok(titulo, mensagem, mostrar_confirm_button, timer_em_ms)
+            {
+                Swal.fire({
+                icon: 'success',
+                title: titulo,
+                text: mensagem,
+                showConfirmButton: mostrar_confirm_button,
+                timer: timer_em_ms
+              });
+            }
+            function information_error(titulo, mensagem, mostrar_confirm_button, timer_em_ms)
+            {
+                Swal.fire({
+                icon: 'error',
+                title: titulo,
+                text: mensagem,
+                showConfirmButton: mostrar_confirm_button,
+                timer: timer_em_ms
+              });
+            }
+            
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <div class="container" >
+            <h1 class="text-center">Operação com Strings</h1>
+            
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <select id="opt_string" class="form-select h-100">
+                        <option value="0">Selecione uma operação</option>
+                        <option value="1">UPPERCASE</option>
+                        <option value="2">lowercase</option>
+                        <option value="3">Reverse</option>
+                        <option value="4">Somente Consoantes</option>
+                        <option value="5">Somente Vogais</option>
+                        <option value="6">Retirar acentuação</option>
+                        <option value="7">Trim</option>
+
+                    </select>
+                    <button type="button" class="btn btn-success h-100" onclick="gerar();">Gerar</button>
+                </div>
+            </div>
+            <h3>Entrada</h3>
+            <div>
+                <textarea id="area_entrada" class="w-100" rows="7"></textarea>
+            </div>
+            <h3>Saida</h3>
+            <div>
+                <textarea id="area_saida" class="w-100" rows="7"></textarea>
+            </div>
+            
+        </div>
+        
+        
+    </body>
+</html>
